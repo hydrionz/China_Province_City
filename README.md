@@ -1,7 +1,7 @@
 下载
 ---
 
-[2022年最新中华人民共和国县以上行政区划代码.json](https://github.com/small-dream/China_Province_City/blob/master/2022%E5%B9%B4%E6%9C%80%E6%96%B0%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%BF%E4%BB%A5%E4%B8%8A%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81.json)
+[2024年最新中华人民共和国县以上行政区划代码.json](https://github.com/small-dream/China_Province_City/blob/master/2024%E5%B9%B4%E6%9C%80%E6%96%B0%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%8E%BF%E4%BB%A5%E4%B8%8A%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E4%BB%A3%E7%A0%81.json)
 
 [Github源码](https://github.com/small-dream/China_Province_City)
 
@@ -10,7 +10,7 @@
 
 什么地方可以获取最权威的省市县数据？当然是官网
 
-[民政部门门户网站](http://www.mca.gov.cn/article/sj/)
+[民政部门门户网站](https://www.mca.gov.cn/n156/index.html)
 
 在网站的最下面，你可以看到最新的行政区划分代码
 
@@ -22,14 +22,14 @@
 
 显然，这样的数据我们是无法使用的，通过查看网页源码发现
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190312190234672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppYW5neHVxYXo=,size_16,color_FFFFFF,t_70)
-我们需要的地区名字和代码 都对应HTML 的 class 标签 xl7128029 和xl7028029 ，这样我们可以通过Jsoup 把这些数据读取出来
+我们需要的地区名字和代码 都对应HTML 的 class 标签 xl7121822 和xl7021822 ，这样我们可以通过Jsoup 把这些数据读取出来
 ```
   try {
             //2019年11月中华人民共和国县以上行政区划代码网页
             Document doc = Jsoup.connect("http://www.mca.gov.cn/article/sj/xzqh/2019/2019/201912251506.html").maxBodySize(0).get();
-            Elements elements = doc.getElementsByClass("xl7128029");
+            Elements elements = doc.getElementsByClass("xl7121822");
             //省和市
-            Elements elementsProAndCity = doc.getElementsByClass("xl7028029");
+            Elements elementsProAndCity = doc.getElementsByClass("和xl7021822");
             List<String> stringListProAndCity = elementsProAndCity.eachText();
             List<String> stringList = elements.eachText();
             List<String> stringName = new ArrayList<String>();

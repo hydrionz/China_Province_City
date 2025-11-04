@@ -8,23 +8,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author jx on 2019/1/3.
- */
-
 public class MainGetData {
     public static void main(String[] args) {
         try {
             //2022年中华人民共和国县以上行政区划代码网页
-            Document doc = Jsoup.connect("https://www.mca.gov.cn/mzsj/xzqh/2022/202201xzqh.html").maxBodySize(0).get();
-            Elements elements = doc.getElementsByClass("xl7032365");
+            Document doc = Jsoup.connect("https://www.mca.gov.cn/mzsj/xzqh/2025/202401xzqh.html").maxBodySize(0).get();
+            Elements elements = doc.getElementsByClass("xl7121822");
             //省和市
-            Elements elementsProAndCity = doc.getElementsByClass("xl7132365");
+            Elements elementsProAndCity = doc.getElementsByClass("xl7021822");
             List<String> stringListProAndCity = elementsProAndCity.eachText();
             List<String> stringList = elements.eachText();
             List<String> stringName = new ArrayList<String>();
             List<String> stringCode = new ArrayList<String>();
             stringListProAndCity.addAll(stringList);
+            stringListProAndCity.remove("省直辖县级行政单位");
             for (int i = 0; i < stringListProAndCity.size(); i++) {
                 if (i % 2 == 0) {
                     //地区代码
@@ -40,7 +37,7 @@ public class MainGetData {
                 throw new RuntimeException("数据错误");
             }
             List<Province> provinceList = processData(stringName, stringCode);
-            String path = FileUtils.getProjectDir() + "/2020年8月中华人民共和国县以上行政区划代码" + ".json";
+            String path = FileUtils.getProjectDir() + "/2024年最新中华人民共和国县以上行政区划代码" + ".json";
             JSONFormatUtils.jsonWriter(provinceList, path);
         } catch (IOException e) {
             e.printStackTrace();
